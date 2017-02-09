@@ -1,0 +1,88 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div class="container-fluid">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#"><h3 style="margin-top:0px;">FAKE NASDAQ Homepage</h3></a>
+	      <ul class="nav navbar-nav navbar-link">
+	      	<li><a href="/stockmarket/#/">Vote!</a></li>
+	      	<li><a href="/stockmarket/#/">Submit a Stock!</a></li>
+      	  </ul>
+  	  	</div>
+  	  </div>	
+	</nav>
+
+
+	{% if latest_stocks %}
+	<div class="container">
+	  <center><h2>Stock Hotboard</h2></center>
+	  <div class="col-lg-8 col-lg-offset-2">            
+		  <table class="table table-striped">
+		    <thead>
+		      <tr>
+		      	<center><th></th></center>
+		        <th>Code</th>
+		        <th>Stock</th>
+		        <th>Value</th>
+		        <th>Votes</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      {% for stock in latest_stocks %}
+		      
+		      <tr>
+		      	<td>
+			      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+  					Vote
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					        <h4 class="modal-title" id="myModalLabel">Vote</h4>
+					      </div>
+					      <div class="modal-body">
+					        <form action="" method="post">
+							{% csrf_token %}
+							    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+							    <label for="choice{{ forloop.counter }}"></label><br />
+							<input type="submit" value="Vote" />
+							</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        <button type="button" class="btn btn-primary" value="vote">Save changes</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				</td>	
+		        <td>{{ stock.stock_code }}</a></td>
+		        <td><a href="/stockmarket/{{ stock.id }}/">{{ stock.stock_name }}</a></td>
+		        <td>{{ stock.value }}</td>
+		        <td>{{ stock.transactions}}
+		      </tr>
+		      {% endfor %}  
+		    </tbody>
+		  </table>
+	</div>
+	{% else %}
+		<p> No current stocks are available. </p>
+	{% endif %}	
+
+</div>
+
+

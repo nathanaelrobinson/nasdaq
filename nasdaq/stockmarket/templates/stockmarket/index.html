@@ -1,0 +1,54 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div class="container-fluid">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#"><h3 style="margin-top:0px;">FAKE NASDAQ Homepage</h3></a>
+	      <ul class="nav navbar-nav navbar-link">
+	      	<li><a href="/stockmarket/vote/">Vote!</a></li>
+	      	<li><a href="/stockmarket/#/">Submit a Stock!</a></li>
+      	  </ul>
+  	  	</div>
+  	  </div>	
+	</nav>
+
+
+	{% if stock_list %}
+	<div class="container">
+	  <center><h2>Stock Hotboard</h2></center>
+	  <div class="col-lg-8 col-lg-offset-2">            
+		  <table class="table table-striped">
+		    <thead>
+		      <tr>
+		        <th>Code</th>
+		        <th>Stock</th>
+		        <th>Value</th>
+		        <th>Votes</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      {% for stock in stock_list%}
+		      <tr>
+		        <td>{{ stock.stock_code }}</a></td>
+		        <td><a href="{% url 'stockmarket:stockpage' stock.id %}">{{ stock.stock_name }}</a></td>
+		        <td>{{ stock.value }}</td>
+		        <td>{{ stock.transactions}}
+		      </tr>
+		      {% endfor %}  
+		    </tbody>
+		  </table>
+	</div>
+	{% else %}
+		<p> No current stocks are available. </p>
+	{% endif %}	
+
+</div>
+
