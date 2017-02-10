@@ -56,7 +56,6 @@
 					      </div>
 					      <div class="modal-body">
 					        <form action="" method="post">
-							{% csrf_token %}
 							    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
 							    <label for="choice{{ forloop.counter }}"></label><br />
 							<input type="submit" value="Vote" />

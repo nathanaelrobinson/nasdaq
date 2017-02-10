@@ -11,10 +11,35 @@
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#"><h3 style="margin-top:0px;">FAKE NASDAQ Homepage</h3></a>
+	      <a class="navbar-brand" href="#"><h3 style="margin-top:0px;">NASDAQ Homepage</h3></a>
 	      <ul class="nav navbar-nav navbar-link">
 	      	<li><a href="/stockmarket/vote/">Vote!</a></li>
-	      	<li><a href="/stockmarket/#/">Submit a Stock!</a></li>
+	      	<li>
+      			<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" style="margin-top:8px;">
+					Submit Stock
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h3 class="modal-title" id="myModalLabel">Submit a Stock Form</h3>
+				      </div>
+				      <div class="modal-body">
+				        <form action="" method="post">
+						    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+						    <label for="choice{{ forloop.counter }}"></label><br />
+							<input type="submit" value="Vote" />
+						</form>
+					      </div>
+					      <div class="modal-footer">
+					      <button type="button" class="btn btn-primary" value="vote">Submit</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</li>
       	  </ul>
   	  	</div>
   	  </div>	
