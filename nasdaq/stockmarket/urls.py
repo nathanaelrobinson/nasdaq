@@ -8,4 +8,5 @@ urlpatterns = [
 	url(r'^vote/$', views.vote, name='vote'),
 	url(r'^(?P<stock_id>[0-9]+)/buy/$', views.buy, name='buy'),
 	url(r'^(?P<stock_id>[0-9]+)/sell/$', views.sell, name='sell'),
+	url(r'^newsubmission/$', views.newsubmission, name='newsubmission')
 ]

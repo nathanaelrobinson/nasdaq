@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
 from django.core.urlresolvers import reverse
 from django.urls import reverse
+from django.utils import timezone
 
 
 def index(request):
@@ -49,5 +50,14 @@ def sell(request, stock_id):
     # user hits the Back button.
     return HttpResponseRedirect(reverse('stockmarket:index'))
 
+def newsubmission(request):
+    newstock = Stock(
+        stock_name= request.POST['new_name'],
+        stock_code= request.POST['new_code'],
+        ipo_date = timezone.now()
+        )
+    newstock.save()
+
+    return HttpResponseRedirect(reverse('stockmarket:index'))
 
 

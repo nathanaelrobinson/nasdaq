@@ -27,15 +27,18 @@
 				        <h3 class="modal-title" id="myModalLabel">Submit a Stock Form</h3>
 				      </div>
 				      <div class="modal-body">
-				        <form action="" method="post">
-						    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-						    <label for="choice{{ forloop.counter }}"></label><br />
-							<input type="submit" value="Vote" />
-						</form>
+				        <form action="{% url 'stockmarket:newsubmission' %}" method="post">
+				        {% csrf_token %}
+				        	<div class="input-group">
+							    <input type="text" class="form-control" name="new_name" id="new_name" placeholder="Stock Name"/>
+							    <input type="text" class="form-control" name="new_code" id="new_code" placeholder="Stock Code"/>
+							</div>
+						
 					      </div>
 					      <div class="modal-footer">
-					      <button type="button" class="btn btn-primary" value="vote">Submit</button>
-				      </div>
+					      <input type="submit" class="btn btn-primary"/>
+				      	</form>
+				      	</div>
 				    </div>
 				  </div>
 				</div>
