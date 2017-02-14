@@ -26,7 +26,7 @@ def stockpage(request, stock_id):
 	return render(request, 'stockmarket/stockdetail.html', {'stock' : stock})
 
 def vote(request):
-	latest_stocks = Stock.objects.order_by('ipo_date')[:5]
+	latest_stocks = Stock.objects.order_by('ipo_date')[:20]
 	return render(request, 'stockmarket/vote.html', {'latest_stocks' : latest_stocks})
 
 def buy(request, stock_id):
