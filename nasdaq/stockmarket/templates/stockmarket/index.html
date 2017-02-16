@@ -7,17 +7,22 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<style>
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+.table > thead>tr>th {
+    padding: 2px;
+</style>
+
 <div class="container-fluid">
 	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
+	  <div class="col-md-8 col-sm-8 col-lg-8 offset-lg-2 offset-md-2 offset-sm-2">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#"><h3 style="margin-top:0px;">NASDAQ Homepage</h3></a>
-	      <ul class="nav navbar-nav navbar-link">
-	      	<li><a href="/stockmarket/vote/">Vote!</a></li>
-	      	<li>
-      			<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" style="margin-top:8px;">
-					Submit Stock
-				</button>
+	      <a class="navbar-brand"><h3 style="margin-top:0px;">The Crew: LAWYERS-AF NASDAQ Homepage</h3></a>
+  			<button type="button" class="btn btn-primary navbar-right" data-toggle="modal" data-target="#myModal" style="margin-top:8px;">
+				Submit Stock
+			</button>
 
 				<!-- Modal -->
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -30,8 +35,10 @@
 				        <form action="{% url 'stockmarket:newsubmission' %}" method="post">
 				        {% csrf_token %}
 				        	<div class="input-group">
-							    <input type="text" class="form-control" name="new_name" id="new_name" placeholder="Stock Name"/>
-							    <input type="text" class="form-control" name="new_code" id="new_code" placeholder="Stock Code"/>
+							    <label> Input Stock Name </label><br>
+							    <input type="text" class="form-control" name="new_name" id="new_name" placeholder="Stock Name"/><br><br>
+							    <label> Input 3/4 Digit Code </label><br>
+							    <input type="text" class="form-control" name="new_code" id="new_code" placeholder="Stock Code"/><br>
 							</div>
 						
 					      </div>
@@ -53,20 +60,34 @@
 	<div class="container">
 	  <center><h2>Stock Hotboard</h2></center>
 	  <div class="col-lg-8 col-lg-offset-2">            
-		  <table class="table table-striped">
+		  <table class="table table-striped table-hover">
 		    <thead>
 		      <tr>
+		      	<th>Buy</th>
+		      	<th>Sell</th>
 		        <th>Code</th>
 		        <th>Stock</th>
 		        <th>Value</th>
-		        <th>Votes</th>
+		        <th>Transactions</th>
 		      </tr>
 		    </thead>
 		    <tbody>
-		      {% for stock in stock_list%}
+		      {% for stock in stock_list %}
 		      <tr>
+		      	<td>
+					    <form action="{% url 'stockmarket:buy' stock.id %}" method="post">
+					    {% csrf_token %}
+				    	<input type="submit" style="" class="btn btn-success btn-sm pull-left" id="stock_value" value="Buy"/>
+				</td>
+				<td>	    
+						</form>
+						<form action="{% url 'stockmarket:sell' stock.id %}" method="post">
+					    {% csrf_token %}
+					    	<input type="submit" class ="btn btn-warning btn-sm" id="stock_value" value="Sell" style="float:left;"/>
+						</form>
+				</td>	
 		        <td>{{ stock.stock_code }}</a></td>
-		        <td><a href="{% url 'stockmarket:stockpage' stock.id %}">{{ stock.stock_name }}</a></td>
+		        <td><a href="/stockmarket/{{ stock.id }}/">{{ stock.stock_name }}</a></td>
 		        <td>{{ stock.value }}</td>
 		        <td>{{ stock.transactions}}
 		      </tr>
