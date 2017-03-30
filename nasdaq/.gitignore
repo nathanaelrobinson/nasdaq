@@ -1,5 +1,5 @@
 
-nasdaq/settings.py
+nasdaq/nasdaq/settings.py
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
