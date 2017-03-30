@@ -35,9 +35,6 @@ def buy(request, stock_id):
     stock_choice.transactions += 1
     stock_choice.value += 1
     stock_choice.save()
-    # Always return an HttpResponseRedirect after successfully dealing
-    # with POST data. This prevents data from being posted twice if a
-    # user hits the Back button.
     return HttpResponseRedirect(reverse('stockmarket:index'))
 def sell(request, stock_id):
     stock_choice = get_object_or_404(Stock, pk=stock_id)
@@ -45,9 +42,7 @@ def sell(request, stock_id):
     stock_choice.transactions += 1
     stock_choice.value -= 1
     stock_choice.save()
-    # Always return an HttpResponseRedirect after successfully dealing
-    # with POST data. This prevents data from being posted twice if a
-    # user hits the Back button.
+
     return HttpResponseRedirect(reverse('stockmarket:index'))
 
 def newsubmission(request):
