@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 	url(r'^', include('stockmarket.urls', namespace='stockmarket')),
+	url(r'^snippets/', include('snippets.urls', namespace='snippets')),
     url(r'^admin/', include(admin.site.urls)),
-    ]
+]
 
